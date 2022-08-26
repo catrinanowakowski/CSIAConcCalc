@@ -26,5 +26,11 @@ calc_EA_vol <- function(smp_mass, cut_vol, massinmachine){
     EA_vols[i] <- cut_vol*rho_smp_tfaaDCM*inj_vols[i]/massinmachine
 
   }
-  return(EA_vol)
+
+  df <- data.frame(inj_vols_ul = inj_vols,
+                   EA_vols_ul = round(EA_vols, digits = 1),
+                   cut_ul = cut_vol,
+                   massinmachine_mg = massinmachine,
+                   smp_mass_mg = smp_mass)
+  return(df)
 }

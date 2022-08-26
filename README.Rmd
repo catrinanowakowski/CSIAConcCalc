@@ -34,15 +34,85 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(CSIAConcCalc)
-## basic example code
 
+## Load data from a hand full of runs
 data(df_runinfo)
 
-calc_massinmachine
+## Calculated the mass that went into the machine on those runs
+df_runinfo$massin <- calc_massinmachine(smp_mass = df_runinfo$smp_mass, 
+                                        cut_vol = df_runinfo$cut, 
+                                        EA_vol = df_runinfo$EA, 
+                                        inj_vol = df_runinfo$inj)
 
-calc_target_mass
 
-calc_EA_vol
 
+```
+```{r what mass should have been the goal }
+#' Look at the peak size that resulted, and then calculated what mass would have
+#' gone in if it was an ideal case
+### CYNO BACTERIA
+df_Carbon_cyno <- df_runinfo[df_runinfo$C_N == "C" & df_runinfo$species =="cyno", ]
+df_Carbon_cyno$TargetMassIn <- calc_target_mass(goal_peak = 2500, 
+                                                test_mass = df_Carbon_cyno$massin, 
+                                                actual_peak = df_Carbon_cyno$peak_average)
+
+df_Nitrogen_cyno <- df_runinfo[df_runinfo$C_N == "N" & df_runinfo$species =="cyno", ]
+df_Nitrogen_cyno$TargetMassIn <- calc_target_mass(goal_peak = 700, 
+                                                test_mass = df_Nitrogen_cyno$massin, 
+                                                actual_peak = df_Nitrogen_cyno$peak_average)
+
+mean(df_Carbon_cyno$TargetMassIn)   ## 0.002 mg of cyno for carbon 
+mean(df_Nitrogen_cyno$TargetMassIn) ## 0.039 mg of cyno for nitrogen 
+
+### New England Black Seabass
+df_Carbon_fish <- df_runinfo[df_runinfo$C_N == "C" & df_runinfo$species =="fish", ]
+df_Carbon_fish$TargetMassIn <- calc_target_mass(goal_peak = 2500, 
+                                                test_mass = df_Carbon_fish$massin, 
+                                                actual_peak = df_Carbon_fish$peak_average)
+
+df_Nitrogen_fish <- df_runinfo[df_runinfo$C_N == "N" & df_runinfo$species =="fish", ]
+df_Nitrogen_fish$TargetMassIn <- calc_target_mass(goal_peak = 700, 
+                                                test_mass = df_Nitrogen_fish$massin, 
+                                                actual_peak = df_Nitrogen_fish$peak_average)
+
+mean(df_Carbon_fish$TargetMassIn)   ## 0.0015 mg of fish for carbon 
+mean(df_Nitrogen_fish$TargetMassIn) ## 0.0314 mg of fish for nitrogen 
+
+
+
+
+```
+
+
+```{r EA volume}
+
+
+### Example for how to calculate the EA volume to dilute the sample at all 
+## possible injection sizes
+calc_EA_vol(smp_mass = df_Carbon_cyno$smp_mass[1], cut_vol = 100, massinmachine = 0.002)
+calc_EA_vol(smp_mass = df_Carbon_fish$smp_mass[1], cut_vol = 100, massinmachine = 0.0015)
+
+
+```
+
+
+
+```{r other notes}
+
+### Need a new starting point target mass for coral samples: 
+### We know the percent carbon and nitrogen for the black seabass from bulk data 
+## 42.75% Carbon 13.23% Nitrogen 
+## Using the average mass in for carbon and nitrogen for the black sea bass we see
+## its about 6.4117 *10^-4 mg of carbon to get peaks of about 3000
+## and then it's about 1.979 *10^-4 mg of nitrogen to get peaks of about 1000
+
+# This gives:
+## C 2.137 *10^-7/mv
+## N 1.979 *10^-7/mv
+
+# So a good starting point would be to aim for about 2*10^-7/mv for a new species 
+# Things that could change this are species by species
+# Error from Lab work 
+# Machine sensitivity and repairs 
 
 ```
