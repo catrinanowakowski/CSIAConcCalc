@@ -1,0 +1,48 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# CSIAConcCalc
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of CSIAConcCalc is to ...
+
+## Installation
+
+You can install the released version of CSIAConcCalc from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("CSIAConcCalc")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(CSIAConcCalc)
+## basic example code
+
+data(df_runinfo)
+
+calc_massinmachine
+
+calc_target_mass
+
+calc_EA_vol
+
+
+```
