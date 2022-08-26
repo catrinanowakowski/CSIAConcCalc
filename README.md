@@ -95,8 +95,6 @@ calc_EA_vol(smp_mass = df_Carbon_fish$smp_mass[1], cut_vol = 100, massinmachine 
 ```
 
 ``` r
-
-
 ### Need a new starting point target mass for coral samples: 
 ### We know the percent carbon and nitrogen for the black seabass from bulk data 
 ## 42.75% Carbon 13.23% Nitrogen 
