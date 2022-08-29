@@ -5,21 +5,21 @@
 #' @param massinmachine PARAM_DESCRIPTION
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
-#' @examples 
+#' @examples
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
 #'  }
 #' }
 #' @rdname calc_EA_vol
-#' @export 
+#' @export
 calc_EA_vol <- function(smp_mass, cut_vol, massinmachine){
   # smp_mass
   # cut_vol
   # massinmachine
 
   rho_smp_tfaaDCM <- smp_mass/1000 #1000ul of tffa and dcm
-  inj_vols <- c(1,1.5,2,2.5,3,3.5,4)
+  inj_vols <- c(0.8,1,1.5,2,2.5,3,3.5,4)
   EA_vols <- rep(NA, length(inj_vols))
 
   for(i in 1:length(inj_vols)){

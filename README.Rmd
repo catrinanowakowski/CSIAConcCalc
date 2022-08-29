@@ -122,6 +122,6 @@ calc_EA_vol(smp_mass = df_Carbon_fish$smp_mass[1], cut_vol = 100, massinmachine 
 
 ## So say we have 42.8%C and 16%N
 # 40/100 =2*10^-7(3000mv)/x x = 0.0014 mg as a starting weight
-# 16/100 =2*10^-7(1000mv)/x  x = 0.00125 mg as 
+# 16/100 =2*10^-7(1000mv)/x  x = 0.00125 mg as  
 
 ```
